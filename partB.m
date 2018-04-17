@@ -1,6 +1,7 @@
 %training_sequence = normrnd(1,1000);
 %h = [0.3, 1,0.7,0.3,0.2];
 %gaussian_noise = awgn(x,25,'measured'); % assume snr 25dB
+% updates
 
 %length of input
 close all;
