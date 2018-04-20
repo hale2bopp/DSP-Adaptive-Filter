@@ -137,10 +137,10 @@ w=pi;
 input = cos(w*m);
 
 w_noise_1 = 0.2*pi; 
-noise_1 = 100*cos(w_noise_1*m); 
+noise_1 = 100*cos(w_noise*m); 
 
 w_noise_2 = 0.6*pi; 
-noise_2 = 100*cos(w_noise_2*m); 
+noise_2 = 100*cos(w_noise*m); 
 
 x = input + noise_1 + noise_2;
 
@@ -196,23 +196,57 @@ xlabel('Samples(n)');
 ylabel('noisy input signal');
 title('noisy input signal (cascade)');
 legend('noisy input');
-
-
+% weights
+%figure(3)
+%{
+subplot(3,1,3);
+stem(m,y);
+xlabel('Samples(n)');
+ylabel('Output signal');
+title('Output  signal');
+hold off;
+%}
+legend('input','noisy input ','y');
 
 figure(5)
-plot(a1);
+plot(a);
 xlabel('Samples(n)');
 ylabel('Weights');
 title('Weights');
 hold on;
+% now outputs
+%figure(3)
+w1 = linspace(0,2*pi,N);
 
-plot(a2);
-xlabel('Samples(n)');
-ylabel('Weights');
-title('Weights');
-hold off;
+figure(6);
+subplot(4,1,1);
+plot(w1,abs(fft(s)));
+xlabel('Frequency(w)'); 
+ylabel('Input signal');
+title('Input signal FFT');
+%hold on;
+X=fft(x);
+subplot(4,1,2);
+plot(w1,abs(X));
+xlabel('Frequency(w)');
+ylabel('noisy input signal');
+title('noisy input signal FFT');
+% weights
+%figure(3)
+%hold on;
+Y=fft(y);
+subplot(4,1,3);
+plot(w1,abs(Y));
+xlabel('Frequency(w)');
+ylabel('Output signal');
+title('Output  signal FFT');
+H=Y./X;
+subplot(4,1,4);
+plot(w1,abs( H  ));
+xlabel('Frequency(w)');
+ylabel('Filter');
+title('Transfer function FFT');
 
-legend('a1','a2');
 
 %% Q B
 
@@ -263,27 +297,7 @@ for k=21:N
 end
 
 
-figure(8);
-subplot(3,1,1);
-stem(m,x);
-xlabel('Samples(n)');
-ylabel('Input signal (cascade)');
-title('Input signal (cascade)');
 
-hold on;
-stem(m,y2);
-xlabel('Samples(n)');
-ylabel('Output signal (cascade)');
-title('Output  signal (cascade)');
-hold off;
-
-legend('input','y(cascade)');
-subplot(3,1,2);
-stem(m,x);
-xlabel('Samples(n)');
-ylabel('noisy input signal');
-title('noisy input signal (cascade)');
-legend('noisy input');
 
 
 
