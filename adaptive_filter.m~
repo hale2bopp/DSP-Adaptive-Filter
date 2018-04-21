@@ -1,0 +1,22 @@
+function [y,a] = adaptive_filter[x, N,mu,r]
+
+% weights  
+a = zeros(1,N);
+e = zeros(1,N);
+% initialize an empty array for output (and also to set the initial value
+% for output
+y =zeros(1,N);
+
+% ADD NOISE
+
+
+for n=3:N
+    e(n) = x(n) + a(n)*x(n-1) +x(n-2);
+    y(n) = e(n) - r*a(n)*y(n-1) - (r^2)*y(n-2);
+    a(n+1) =a(n) - mu*y(n)*x(n-1);
+    if (abs(a(n+1))>2)
+        a(n+1) = 0;
+    end
+end
+
+end
