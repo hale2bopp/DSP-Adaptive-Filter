@@ -1,21 +1,20 @@
 %% Q B
-
 N = 5000;
 
 train = sign(rand(1, N)-0.5);
 train = 20*train;
 
-h = [0.3,1,0.7,0.3,0.2];
+h = [0.4,0.5,1,0.2,0.3];
 noise = randn( 1, length(conv(h,train)) );
 x = conv(h, train) + noise;
 
-
 d = 2;
+
 M = 20;
 adapt_filter = zeros(1,M+1);
-adapt_filter(M/2) = 1;
+adapt_filter(ceil(M/2)) = 1;
 mu = 1e-6;
-error1 = zeros(1,N);
+error = zeros(1,N);
 y = zeros(1,N);
 
 for k=M+1:N
@@ -28,10 +27,10 @@ for k=M+1:N
     end
 end
 
-figure; plot(error1);
-figure; freqz(h,1);
-figure; freqz(adapt_filter,1);
+figure; plot(error); title('Error M=20, mu =1e-6, h = [0.4,0.5,1,0.2,0.3]');
+figure; freqz(h,1);title('Channel Impulse Response M=20,mu =1e-6, h = [0.4,0.5,1,0.2,0.3]');
+figure;freqz(adapt_filter,1);title('Adaptive Filter Frequency Response M=20,mu =1e-6,h = [0.4,0.5,1,0.2,0.3]');
+
 
 % conv(h,adapt_filter) should have a notch response
-figure; plot(error1);
-figure; freqz(h,adapt_filter);
+

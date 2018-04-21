@@ -1,8 +1,3 @@
-%training_sequence = normrnd(1,1000);
-%h = [0.3, 1,0.7,0.3,0.2];
-%gaussian_noise = awgn(x,25,'measured'); % assume snr 25dB
-% updates
-
 %length of input
 close all;
 N= 20000;
@@ -251,8 +246,6 @@ figure; freqz(h,1);
 figure; freqz(adapt_filter,1);
 
 % conv(h,adapt_filter) should have a notch response
-figure; plot(error);
-figure; freqz(h,adapt_filter);
 
 
 %% Q B Part 2

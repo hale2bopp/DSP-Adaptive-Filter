@@ -1,5 +1,5 @@
 %% Q B
-N = 5000;
+N = 50000;
 
 train = sign(rand(1, N)-0.5);
 train = 20*train;
@@ -8,12 +8,11 @@ h = [0.3,1,0.7,0.3,0.2];
 noise = randn( 1, length(conv(h,train)) );
 x = conv(h, train) + noise;
 
-
 d = 2;
-M = 20;
+M = 40;
 adapt_filter = zeros(1,M+1);
 adapt_filter(M/2) = 1;
-mu = 1e-6;
+mu = 1e-5;
 error1 = zeros(1,N);
 y = zeros(1,N);
 
@@ -29,13 +28,13 @@ end
 
 figure; plot(error1);title('error');
 figure; freqz(h,1);title('channel');
-figure; freqz(adapt_filter,1);title('adapt filter');
+figure; freqz(adapt_filter,1);title('adaptive filter');
 
-
-
-
-
-
-
-
-
+figure;
+stem(train)
+hold on;
+stem(y);
+hold off;
+xlabel('Samples');
+title('Training sequence and output sequence');
+legend('train','y');
